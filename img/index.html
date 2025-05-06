@@ -188,7 +188,7 @@
     <!-- Calculadora de Puntaje -->
     <div class="juego">
       <h3>Calculadora de puntaje / Score Calculator</h3>
-      <p>Ingresa el puntaje que obtuviste en cada juego (Máx: 610.000):</p>
+      <p>Ingresa el puntaje que obtuviste en cada juego (Máx: 700.000):</p>
       <div id="calculadora-puntaje" style="text-align: center;">
         <label>Memoria de Deportes: <input type="number" id="p1" min="0" step="any" readonly></label><br><br>
         <label>Parejas de Deportes: <input type="number" id="p2" min="0" step="any" readonly></label><br><br>
@@ -329,28 +329,28 @@
     if (tipo === 'feliz') {
    // Crear lluvia de corazones (usando emojis de corazón)
    for (let i = 0; i < 100; i++) {
-        const corazon = document.createElement('span');
-        corazon.textContent = '❤';  // Corazón rojo
-        corazon.style.position = 'absolute';
-        corazon.style.left = '${Math.random() * window.innerWidth}px';
-        corazon.style.top = '${Math.random() * window.innerHeight}px';
-        corazon.style.fontSize = '${Math.random() * 20 + 10}px';  // Tamaño aleatorio
-        corazon.style.animation = 'caerCorazon ${Math.random() * 3 + 2}s linear infinite';  // Animación para que caigan
-        confetiContainer.appendChild(corazon);
-      } 
+  const corazon = document.createElement('span');
+  corazon.textContent = '❤️';
+  corazon.style.position = 'absolute';
+  corazon.style.left = `${Math.random() * window.innerWidth}px`;
+  corazon.style.top = `${Math.random() * window.innerHeight}px`;
+  corazon.style.fontSize = `${Math.random() * 20 + 10}px`;
+  corazon.style.animation = `caerCorazon ${Math.random() * 3 + 2}s linear infinite`;
+  confetiContainer.appendChild(corazon);
+}
+
     } else if (tipo === 'aburrido') {
       // Crear lluvia de lágrimas (usando emojis de lágrima)
       for (let i = 0; i < 100; i++) {
-      
-        const lagrima = document.createElement('span');
-        lagrima.textContent = '😭';  // Lagrima
-        lagrima.style.position = 'absolute';
-        lagrima.style.left = '${Math.random() * window.innerWidth}px';
-        lagrima.style.top = '${Math.random() * window.innerHeight}px';
-        lagrima.style.fontSize = '${Math.random() * 20 + 10}px';  // Tamaño aleatorio
-        lagrima.style.animation = 'caerLagrima ${Math.random() * 3 + 2}s linear infinite';
-        confetiContainer.appendChild(lagrima);
-      }
+  const lagrima = document.createElement('span');
+  lagrima.textContent = '😭';
+  lagrima.style.position = 'absolute';
+  lagrima.style.left = `${Math.random() * window.innerWidth}px`;
+  lagrima.style.top = `${Math.random() * window.innerHeight}px`;
+  lagrima.style.fontSize = `${Math.random() * 20 + 10}px`;
+  lagrima.style.animation = `caerLagrima ${Math.random() * 3 + 2}s linear infinite`;
+  confetiContainer.appendChild(lagrima);
+}
     }
   }
 
