@@ -123,25 +123,29 @@
       margin-top: 20px;
     }
 
-    #botonMusica {
-      padding: 8px 16px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+   #boton-musica {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
   </style>
 </head>
 
 <body>
 
 
-  <!-- Música de fondo -->
-  <audio id="audio-fondo" loop autoplay>
-    <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mp3">
-  </audio>
-  <button onclick="toggleMusica()" id="boton-musica">⏸ Pausar música</button>
-  <div class="contenedor">
-    <h1>Juegos Deportivos / Sports Games  ¡¡TÚ PUEDES!!</h1>
+ <!-- Música de fondo -->
+<audio id="musica-fondo" loop autoplay>
+  <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mp3">
+</audio>
 
+  
+
+   <div class="contenedor">
+    <h1>Juegos Deportivos / Sports Games  ¡¡TÚ PUEDES!!</h1>
+ <button onclick="toggleMusica()" id="boton-musica" aria-label="Botón para pausar o reproducir música">⏸ Pausar música</button>
     <!-- Lista de Juegos -->
     <div id="lista-juegos">
       <!-- Aquí los juegos se insertan dinámicamente -->
@@ -373,7 +377,8 @@
 
   const audioFondo = document.getElementById('audio-fondo');
   const botonMusica = document.getElementById('boton-musica');
-  const iframeJuego6 = document.querySelector('iframe[src*="23472276"]');
+  const iframeJuego6 = document.querySelector('iframe[src*="23581126"]');
+
 
   // Alternar música con botón
   function toggleMusica() {
@@ -510,6 +515,15 @@ function mostrarResultados() {
 window.onload = () => {
   nuevaPalabra();
 };
+  
+  document.addEventListener('DOMContentLoaded', () => {
+      const audioFondo = document.getElementById('audio-fondo');
+  const audioFondo = document.getElementById('audio-fondo');
+    
+    // Manipula el audio como necesites
+    audioFondo.volume = 0.5;
+    audioFondo.play();
+  
 </script>
 
 </body>
