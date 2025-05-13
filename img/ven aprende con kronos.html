@@ -176,13 +176,19 @@
         <p>Puntaje:</p><input type="number" id="puntaje-juego7" value="0" min="0" step="any" onchange="actualizarPuntajeGeneral()">
       </div>
     </div>
+    <div style="margin-top: 20px;">
+      <button onclick="nuevaPalabra()" id="boton-siguiente" style="padding: 10px 20px; font-size: 16px; border-radius: 6px; background-color: #4CAF50; color: white;">
+        Siguiente
+      </button>
+    </div>
+  </div>
 
     <div style="margin: 60px 0; border-top: 2px solid #1d2caf;"></div>
 
     <!-- Calculadora de Puntaje -->
     <div class="juego">
       <h3>Calculadora de puntaje / Score Calculator</h3>
-      <p>Ingresa el puntaje que obtuviste en cada juego (Máx: 610.000):</p>
+      <p>Ingresa el puntaje que obtuviste en cada juego (Máx: 700.000):</p>
       <div id="calculadora-puntaje" style="text-align: center;">
         <label>Memoria de Deportes: <input type="number" id="p1" min="0" step="any" readonly></label><br><br>
         <label>Parejas de Deportes: <input type="number" id="p2" min="0" step="any" readonly></label><br><br>
@@ -269,10 +275,37 @@
     }
 
     function reiniciarPuntajes() {
-      document.querySelectorAll('.puntaje-juego input').forEach(input => input.value = 0);
-      actualizarPuntajeGeneral();
-      document.getElementById('resultado').textContent = '';
-    }
+  document.querySelectorAll('.puntaje-juego input').forEach(input => input.value = 0);
+  actualizarPuntajeGeneral();
+  document.getElementById('resultado').textContent = '';
+
+  // Reiniciar juego 7
+  palabras.splice(0, palabras.length,  // restaurar las palabras originales
+    { en: "soccer", es: "fútbol" },
+    { en: "basketball", es: "baloncesto" },
+    { en: "voleyball", es: "voleybol" },
+    { en: "tennis", es: "tenis" },
+    { en: "skating", es: "patinaje" },
+    { en: "gymnastics", es: "gimnasia" },
+    { en: "swimming", es: "natación" },
+    { en: "cycling", es: "ciclismo" },
+    { en: "boxing", es: "boxeo" },
+    { en: "fencing", es: "esgrima" }
+  );
+
+  puntajeGlosario = 0;
+  resultados = [];
+  document.getElementById("respuesta").style.display = "inline-block";
+  document.getElementById("respuesta").value = "";
+  document.getElementById("boton-siguiente").style.display = "inline-block";
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("palabra-en").textContent = "Palabra";
+  document.getElementById("puntaje-juego7").value = 0;
+
+  nuevaPalabra();
+}
+
+
 
     
     
@@ -296,28 +329,28 @@
     if (tipo === 'feliz') {
    // Crear lluvia de corazones (usando emojis de corazón)
    for (let i = 0; i < 100; i++) {
-        const corazon = document.createElement('span');
-        corazon.textContent = '❤';  // Corazón rojo
-        corazon.style.position = 'absolute';
-        corazon.style.left = '${Math.random() * window.innerWidth}px';
-        corazon.style.top = '${Math.random() * window.innerHeight}px';
-        corazon.style.fontSize = '${Math.random() * 20 + 10}px';  // Tamaño aleatorio
-        corazon.style.animation = 'caerCorazon ${Math.random() * 3 + 2}s linear infinite';  // Animación para que caigan
-        confetiContainer.appendChild(corazon);
-      } 
+  const corazon = document.createElement('span');
+  corazon.textContent = '❤️';
+  corazon.style.position = 'absolute';
+  corazon.style.left = `${Math.random() * window.innerWidth}px`;
+  corazon.style.top = `${Math.random() * window.innerHeight}px`;
+  corazon.style.fontSize = `${Math.random() * 20 + 10}px`;
+  corazon.style.animation = `caerCorazon ${Math.random() * 3 + 2}s linear infinite`;
+  confetiContainer.appendChild(corazon);
+}
+
     } else if (tipo === 'aburrido') {
       // Crear lluvia de lágrimas (usando emojis de lágrima)
       for (let i = 0; i < 100; i++) {
-      
-        const lagrima = document.createElement('span');
-        lagrima.textContent = '😭';  // Lagrima
-        lagrima.style.position = 'absolute';
-        lagrima.style.left = '${Math.random() * window.innerWidth}px';
-        lagrima.style.top = '${Math.random() * window.innerHeight}px';
-        lagrima.style.fontSize = '${Math.random() * 20 + 10}px';  // Tamaño aleatorio
-        lagrima.style.animation = 'caerLagrima ${Math.random() * 3 + 2}s linear infinite';
-        confetiContainer.appendChild(lagrima);
-      }
+  const lagrima = document.createElement('span');
+  lagrima.textContent = '😭';
+  lagrima.style.position = 'absolute';
+  lagrima.style.left = `${Math.random() * window.innerWidth}px`;
+  lagrima.style.top = `${Math.random() * window.innerHeight}px`;
+  lagrima.style.fontSize = `${Math.random() * 20 + 10}px`;
+  lagrima.style.animation = `caerLagrima ${Math.random() * 3 + 2}s linear infinite`;
+  confetiContainer.appendChild(lagrima);
+}
     }
   }
 
@@ -369,13 +402,13 @@
 
 <script>
   const palabras = [
-    { en: "soccer", es: "futbol" },
+    { en: "soccer", es: "fútbol" },
     { en: "basketball", es: "baloncesto" },
     { en: "voleyball", es: "voleybol" },
     { en: "tennis", es: "tenis" },
     { en: "skating", es: "patinaje" },
     { en: "gymnastics", es: "gimnasia" },
-    { en: "swimming", es: "natacion" },
+    { en: "swimming", es: "natación" },
     { en: "cycling", es: "ciclismo" },
     { en: "boxing", es: "boxeo" },
     { en: "fencing", es: "esgrima" }
@@ -383,40 +416,96 @@
 
   let palabraActual = {};
   let puntajeGlosario = 0;
+  let resultados = []; // Guardará cada intento del usuario
 
-  function quitarTildes(texto) {
-      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    }
-
-    // Función para mostrar el mensaje
-    function mostrarMensaje(mensaje, color) {
-      const feedback = document.getElementById('feedback');
-      feedback.textContent = mensaje;
-      feedback.className = color;
-    }
-
+  
   function nuevaPalabra() {
-    palabraActual = palabras[Math.floor(Math.random() * palabras.length)];
-    document.getElementById('palabra-en').textContent = palabraActual.en;
-    document.getElementById('respuesta').value = '';
-    document.getElementById('feedback').textContent = '';
-  }
+    if (palabras.length === 0) {
+  document.getElementById('palabra-en').textContent = '🎉 ¡Juego terminado!';
+  document.getElementById('respuesta').style.display = 'none';
+  document.getElementById('boton-siguiente').style.display = 'none';
 
-  function verificarRespuesta() {
-  const respuestaUsuario = document.getElementById('respuesta').value.trim().toLowerCase();
-  if (respuestaUsuario === palabraActual.es.toLowerCase()) {
+  let resumenHTML = "<h4>Resumen de respuestas:</h4><ul>";
+  resultados.forEach(r => {
+    const icono = r.correcto ? "✅" : "❌";
+    resumenHTML += `<li>${icono} "${r.en}" → "${r.usuario}" (correcto: ${r.es})</li>`;
+  });
+  resumenHTML += "</ul>";
+  document.getElementById('feedback').innerHTML = resumenHTML;
+
+  return;
+}
+palabraActual = palabras[Math.floor(Math.random() * palabras.length)];
+  document.getElementById('palabra-en').textContent = palabraActual.en;
+  document.getElementById('respuesta').value = '';
+  document.getElementById('respuesta').style.display = 'inline-block';
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('boton-siguiente').style.display = 'inline-block';
+  document.getElementById('verificar-btn').style.display = 'inline-block'; // Mostrar el botón de verificar
+}
+  
+
+  function eliminarTildes(texto) {
+  var tildes = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u", "Á": "A", "É": "E", "Í": "I", "Ó": "O", "Ú": "U"};
+  return texto.split('').map(function(c) {
+    return tildes[c] || c;
+  }).join('');
+}
+
+function verificarRespuesta() {
+  const respuestaUsuarioRaw = document.getElementById('respuesta').value.trim();
+  const respuestaUsuario = eliminarTildes(document.getElementById('respuesta').value.trim().toLowerCase());
+  const respuestaCorrecta = eliminarTildes(palabraActual.es.toLowerCase());
+
+  const resultado = {
+    en: palabraActual.en,
+    es: palabraActual.es,
+    usuario: respuestaUsuarioRaw,
+    correcto: respuestaUsuario === respuestaCorrecta
+  };
+
+  resultados.push(resultado);
+  if (respuestaUsuario === respuestaCorrecta) {
     document.getElementById('feedback').textContent = "✅ ¡Correcto!";
     puntajeGlosario += 10;  // Se suma 10 puntos por respuesta correcta
     document.getElementById('puntaje-juego7').value = puntajeGlosario;
-    actualizarPuntajeGeneral();
-    confetti();
+    actualizarPuntajeGeneral?.();  // Verifica que esta función exista
+    confetti?.();  // Igual aquí
   } else {
-    document.getElementById('feedback').textContent = `❌ Incorrecto. Era: ${palabraActual.es}`;
-    puntajeGlosario = Math.max(0, puntajeGlosario - 10);  // Se resta 10 puntos por respuesta incorrecta, sin permitir puntajes negativos
+    document.getElementById('feedback').textContent =
+      `❌ Incorrecto. "${palabraActual.en}" se traduce como: ${palabraActual.es}`;
+    puntajeGlosario = Math.max(0, puntajeGlosario - 10);
     document.getElementById('puntaje-juego7').value = puntajeGlosario;
     actualizarPuntajeGeneral();
   }
+
+
+    const index = palabras.indexOf(palabraActual);
+    if (index !== -1) {
+      palabras.splice(index, 1); // Eliminar la palabra de la lista
+    }
+  
   setTimeout(nuevaPalabra, 2000);
+
+  // Mostrar resultados al final del juego
+function mostrarResultados() {
+  const resultadosDiv = document.getElementById('resultados');
+  resultadosDiv.innerHTML = '';  // Limpiar cualquier contenido previo
+
+  let listaResultados = '<h3>Resultados del Juego</h3><ul>';
+  
+  resultados.forEach(resultado => {
+    listaResultados += `<li>
+      ${resultado.en} - ${resultado.usuario} 
+      ${resultado.correcto ? '✅' : '❌'} 
+      <span style="font-size: 12px; color: gray;">(Correcto: ${resultado.es})</span>
+    </li>`;
+  });
+
+  listaResultados += '</ul>';
+  resultadosDiv.innerHTML = listaResultados;
+}
+
 }
 window.onload = () => {
   nuevaPalabra();
