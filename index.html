@@ -9,12 +9,53 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
+    body, html {
+      margin: 0; 
+      height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+    .side {
+      flex: 1;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      padding: 20px;
+      font-size: 2em;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .left {
+      background-image: url('https://images.unsplash.com/photo-1508264165352-c20f6f118b12?auto=format&fit=crop&w=800&q=80');
+    }
+    .right {
+      background-image: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=800&q=80');
+    }
+    
     @font-face {
       font-family: 'Flatory Slab Condensed';
       src: url('FlatorySlabCondensed.ttf');
     }
 
-    body  {
+    body {
       margin: 0;
       padding: 0;
       height: 100vh;
@@ -151,9 +192,20 @@
       cursor: pointer;
     }
   </style>
+  
 </head>
 
 <body>
+   <div class="container">
+    <div class="side left">
+      <div class="overlay"></div>
+      <div class="content">Fútbol ⚽</div>
+    </div>
+    <div class="side right">
+      <div class="overlay"></div>
+      <div class="content">Ballet 🩰</div>
+    </div>
+  </div>
 
 
   <!-- Música de fondo -->
@@ -305,7 +357,7 @@
   palabras.splice(0, palabras.length,  // restaurar las palabras originales
     { en: "soccer", es: "fútbol" },
     { en: "basketball", es: "baloncesto" },
-    { en: "voleyball", es: "voleibol" },
+    { en: "volleyball", es: "voleibol" },
     { en: "tennis", es: "tenis" },
     { en: "skating", es: "patinaje" },
     { en: "gymnastics", es: "gimnasia" },
@@ -426,7 +478,7 @@
   const palabras = [
     { en: "soccer", es: "fútbol" },
     { en: "basketball", es: "baloncesto" },
-    { en: "voleyball", es: "voleibol" },
+    { en: "volleyball", es: "voleibol" },
     { en: "tennis", es: "tenis" },
     { en: "skating", es: "patinaje" },
     { en: "gymnastics", es: "gimnasia" },
