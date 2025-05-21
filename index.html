@@ -14,7 +14,7 @@
       src: url('FlatorySlabCondensed.ttf');
     }
 
-    body {
+    body  {
       margin: 0;
       padding: 0;
       height: 100vh;
@@ -25,6 +25,23 @@
       color: white;
       position: relative;
       overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 50%),
+        url('https://i.imgur.com/7G0zYZC.jpg'),
+        url('https://i.imgur.com/Ft4ZuWz.jpg');
+      background-size: 100% 100%, 50% 100%, 50% 100%;
+      background-position: center, left, right;
+      background-repeat: no-repeat;
+      z-index: -1;
     }
 
     h1, h2, h3 {
@@ -134,11 +151,12 @@
       cursor: pointer;
     }
   </style>
-  
 </head>
 
 <body>
- <!-- Música de fondo -->
+
+
+  <!-- Música de fondo -->
   <audio id="audio-fondo" loop autoplay>
     <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mp3">
   </audio>
@@ -251,7 +269,7 @@
     ];
 
     juegos.forEach(juego => {
-      document.getElementById('lista-juegos').innerHTML += `
+      document.getElementById('lista-juegos').innerHTML += 
         <div class="juego">
           <h3>${juego.titulo}</h3>
           <iframe src="${juego.src}" allowfullscreen></iframe>
@@ -260,7 +278,7 @@
             <input type="number" id="${juego.inputId}" value="0" min="0" step="any" onchange="actualizarPuntajeGeneral()">
           </div>
         </div>
-      `;
+      ;
     });
 
     function actualizarPuntajeGeneral() {
@@ -287,7 +305,7 @@
   palabras.splice(0, palabras.length,  // restaurar las palabras originales
     { en: "soccer", es: "fútbol" },
     { en: "basketball", es: "baloncesto" },
-    { en: "volleyball", es: "voleibol" },
+    { en: "voleyball", es: "voleibol" },
     { en: "tennis", es: "tenis" },
     { en: "skating", es: "patinaje" },
     { en: "gymnastics", es: "gimnasia" },
@@ -336,10 +354,10 @@
   const corazon = document.createElement('span');
   corazon.textContent = '❤️';
   corazon.style.position = 'absolute';
-  corazon.style.left = `${Math.random() * window.innerWidth}px`;
-  corazon.style.top = `${Math.random() * window.innerHeight}px`;
-  corazon.style.fontSize = `${Math.random() * 20 + 10}px`;
-  corazon.style.animation = `caerCorazon ${Math.random() * 3 + 2}s linear infinite`;
+  corazon.style.left = ${Math.random() * window.innerWidth}px;
+  corazon.style.top = ${Math.random() * window.innerHeight}px;
+  corazon.style.fontSize = ${Math.random() * 20 + 10}px;
+  corazon.style.animation = caerCorazon ${Math.random() * 3 + 2}s linear infinite;
   confetiContainer.appendChild(corazon);
 }
 
@@ -349,10 +367,10 @@
   const lagrima = document.createElement('span');
   lagrima.textContent = '😭';
   lagrima.style.position = 'absolute';
-  lagrima.style.left = `${Math.random() * window.innerWidth}px`;
-  lagrima.style.top = `${Math.random() * window.innerHeight}px`;
-  lagrima.style.fontSize = `${Math.random() * 20 + 10}px`;
-  lagrima.style.animation = `caerLagrima ${Math.random() * 3 + 2}s linear infinite`;
+  lagrima.style.left = ${Math.random() * window.innerWidth}px;
+  lagrima.style.top = ${Math.random() * window.innerHeight}px;
+  lagrima.style.fontSize = ${Math.random() * 20 + 10}px;
+  lagrima.style.animation = caerLagrima ${Math.random() * 3 + 2}s linear infinite;
   confetiContainer.appendChild(lagrima);
 }
     }
@@ -362,7 +380,7 @@
  const estiloAnimaciones = document.createElement('style');
   document.head.appendChild(estiloAnimaciones);
 
-  estiloAnimaciones.innerHTML = `
+  estiloAnimaciones.innerHTML = 
     @keyframes caerCorazon {
       0% { transform: translateY(-100px); opacity: 1; }
       100% { transform: translateY(${window.innerHeight}px); opacity: 0; }
@@ -372,7 +390,7 @@
       0% { transform: translateY(-100px); opacity: 1; }
       100% { transform: translateY(${window.innerHeight}px); opacity: 0; }
     }
-  `;
+  ;
   
 
   const audioFondo = document.getElementById('audio-fondo');
@@ -408,7 +426,7 @@
   const palabras = [
     { en: "soccer", es: "fútbol" },
     { en: "basketball", es: "baloncesto" },
-    { en: "volleyball", es: "voleibol" },
+    { en: "voleyball", es: "voleibol" },
     { en: "tennis", es: "tenis" },
     { en: "skating", es: "patinaje" },
     { en: "gymnastics", es: "gimnasia" },
@@ -432,7 +450,7 @@
   let resumenHTML = "<h4>Resumen de respuestas:</h4><ul>";
   resultados.forEach(r => {
     const icono = r.correcto ? "✅" : "❌";
-    resumenHTML += `<li>${icono} "${r.en}" → "${r.usuario}" (correcto: ${r.es})</li>`;
+    resumenHTML += <li>${icono} "${r.en}" → "${r.usuario}" (correcto: ${r.es})</li>;
   });
   resumenHTML += "</ul>";
   document.getElementById('feedback').innerHTML = resumenHTML;
@@ -477,7 +495,7 @@ function verificarRespuesta() {
     confetti?.();  // Igual aquí
   } else {
     document.getElementById('feedback').textContent =
-      `❌ Incorrecto. "${palabraActual.en}" se traduce como: ${palabraActual.es}`;
+      ❌ Incorrecto. "${palabraActual.en}" se traduce como: ${palabraActual.es};
     puntajeGlosario = Math.max(0, puntajeGlosario - 10);
     document.getElementById('puntaje-juego7').value = puntajeGlosario;
     actualizarPuntajeGeneral();
@@ -499,11 +517,11 @@ function mostrarResultados() {
   let listaResultados = '<h3>Resultados del Juego</h3><ul>';
   
   resultados.forEach(resultado => {
-    listaResultados += `<li>
+    listaResultados += <li>
       ${resultado.en} - ${resultado.usuario} 
       ${resultado.correcto ? '✅' : '❌'} 
       <span style="font-size: 12px; color: gray;">(Correcto: ${resultado.es})</span>
-    </li>`;
+    </li>;
   });
 
   listaResultados += '</ul>';
