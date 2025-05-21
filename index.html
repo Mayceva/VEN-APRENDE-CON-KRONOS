@@ -15,25 +15,17 @@
     }
 
     body {
-      margin: 0;
+  margin: 0;
   height: 100vh;
-  background: linear-gradient(to right, 
-              rgba(0, 0, 0, 0.6) 50%, 
-              rgba(0, 0, 0, 0.6) 50%), 
-              url('https://i.imgur.com/7G0zYZC.jpg'), /* imagen fútbol izquierda */
-              url('https://i.imgur.com/Ft4ZuWz.jpg'); /* imagen ballet derecha */
-  background-size: 50% 100%, 50% 100%, 50% 100%;
-  background-repeat: no-repeat;
-  background-position: left, left, right;
+  background: 
+    url('https://i.imgur.com/7G0zYZC.jpg') left center no-repeat,
+    url('https://i.imgur.com/Ft4ZuWz.jpg') right center no-repeat;
+  background-size: 50% 100%;
   background-attachment: fixed;
-  font-family: Arial, sans-serif;
+  font-family: 'Flatory Slab Condensed', sans-serif;
   color: white;
-      font-family: sans-serif;
-      background-color: #fff;
-      margin: 0;
-      padding: 20px;
-      color: rgb(7, 13, 5);
-    }
+  padding: 20px;
+}
 
     h1, h2, h3 {
       text-align: center;
