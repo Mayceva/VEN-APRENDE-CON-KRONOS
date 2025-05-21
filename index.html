@@ -14,17 +14,20 @@
       src: url('FlatorySlabCondensed.ttf');
     }
 
-    body {
+    body  {
   margin: 0;
+  padding: 20px;
   height: 100vh;
   background: 
-    url('https://i.imgur.com/7G0zYZC.jpg') left center no-repeat,
-    url('https://i.imgur.com/Ft4ZuWz.jpg') right center no-repeat;
-  background-size: 50% 100%;
+    linear-gradient(to right, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 50%),
+    url('https://i.imgur.com/7G0zYZC.jpg'),
+    url('https://i.imgur.com/Ft4ZuWz.jpg');
+  background-size: 100% 100%, 50% 100%, 50% 100%;
+  background-repeat: no-repeat;
+  background-position: center, left, right;
   background-attachment: fixed;
-  font-family: 'Flatory Slab Condensed', sans-serif;
+  font-family: 'Flatory Slab Condensed', Arial, sans-serif;
   color: white;
-  padding: 20px;
 }
 
     h1, h2, h3 {
