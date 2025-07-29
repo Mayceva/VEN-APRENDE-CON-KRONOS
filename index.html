@@ -8,6 +8,7 @@
   <!-- Confetti JS -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+<<<<<<< HEAD
    <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,6 +19,154 @@
   <script src="./js/load-menu.js"></script>
 
   <div id="menu-container"></div>pt>
+=======
+  <style>
+    @font-face {
+      font-family: 'Flatory Slab Condensed';
+      src: url('FlatorySlabCondensed.ttf');
+    }
+body {
+
+
+
+
+  font-family: sans-serif;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('https://i.postimg.cc/CxVTyNMQ/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 20px;
+  color: white;
+   align-items: center;
+}
+
+
+    h1, h2, h3 {
+      text-align: center;
+      color: #c914c0;
+      font-family: 'Flatory Slab Condensed', sans-serif;
+    }
+
+    .contenedor {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+       align-items:"center";
+    }
+
+    .juego {
+      margin-top: 40px;
+      padding: 20px;
+      background: #000;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(207, 14, 14, 0.6);
+      align-items:"center";
+    }
+
+    a.boton-juego, button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 30px;
+      background-color: #38eb71;
+      color: rgb(1, 1, 1);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      transition: transform 0.3s, background-color 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    a.boton-juego:hover, button:hover {
+      background-color: #d8df0f91;
+      transform: scale(1.05);
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 795px;
+      height: 690px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(228, 38, 193, 0.2);
+    }
+
+    .valoracion-caritas {
+      text-align: center;
+      margin-top: 40px;
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .carita {
+      display: inline-block;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 32px;
+      transition: transform 0.2s;
+    }
+
+    .carita:hover {
+      transform: scale(1.2);
+    }
+
+    .carita.selected {
+      transform: scale(1.3);
+      border-bottom: 2px solid #1daf68;
+    }
+
+    .nombre-carita {
+      font-size: 14px;
+      color: white;
+      margin-top: 5px;
+    }
+
+    .puntaje-juego {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .puntaje-juego input {
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      width: 80px;
+    }
+    #juego6-container {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Espacio entre juego y botón */
+      margin-top: 20px;
+    }
+
+    #botonMusica {
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- Barra de búsqueda -->
+<div style="text-align: center; margin-bottom: 20px;">
+  <input id="busquedaUnidad" type="text" placeholder="Buscar unidad..." style="padding: 10px; width: 60%; max-width: 400px; border-radius: 8px; font-size: 16px;">
+  <button onclick="irAUnidad()" style="padding: 10px 20px; font-size: 16px; border-radius: 8px;">Ir</button>
+</div>
+
+  
+>>>>>>> ba75f9d152a64ebfacc2200bb580a99d709e1627
 
 
   <!-- Música de fondo -->
@@ -412,6 +561,27 @@ window.onload = () => {
   nuevaPalabra();
 };
 </script>
+
+<script>
+  function irAUnidad() {
+    const valor = document.getElementById("busquedaUnidad").value.toLowerCase().trim();
+    if (valor.includes("3 unidad") || valor.includes("unidad 3") || valor === "3") {
+      window.location.href = "3unidad.html"; // Cambia por el nombre real del archivo si es diferente
+    } else {
+      alert("Unidad no encontrada. Intenta escribir '3 unidad'");
+    }
+  }
+
+  // También permite buscar al presionar Enter
+  document.getElementById("busquedaUnidad").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      irAUnidad();
+    }
+  });
+</script>
+
+
+
 
 </body>
 </html>

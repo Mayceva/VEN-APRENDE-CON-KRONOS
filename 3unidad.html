@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2° Medio - Unit 3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f0f8ff; }
+    .title { font-family: 'Comic Sans MS', cursive; color: #2a52be; }
+    .card { cursor: pointer; }
+    .match-section { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1 text-white">2° Medio - Unit 3: Let's Learn!</span>
+    <a href="index.html" class="btn btn-outline-light">← Back to Main</a>
+  </div>
+</nav>
+
+<!-- Welcome -->
+<div class="container mt-4 text-center">
+  <h2 class="title">Welcome to Unit 3 - Fun English!</h2>
+  <p>Click on the sections below to learn and play!</p>
+</div>
+
+<!-- Sections -->
+<div class="container mt-4">
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card border-primary" onclick="showSection('vocab')">
+        <div class="card-body text-center">
+          <h5 class="card-title">🗣 Vocabulary</h5>
+          <p class="card-text">Learn key English words with images!</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-success" onclick="showSection('match')">
+        <div class="card-body text-center">
+          <h5 class="card-title">🎮 Matching Game</h5>
+          <p class="card-text">Match English words with pictures!</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-warning" onclick="showSection('quiz')">
+        <div class="card-body text-center">
+          <h5 class="card-title">📝 Mini Quiz</h5>
+          <p class="card-text">Test your knowledge!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sections Content -->
+<div class="container mt-5">
+  <!-- Vocabulary -->
+  <div id="vocab" class="match-section">
+    <h3 class="text-primary">Vocabulary</h3>
+    <div class="row">
+      <div class="col-4 text-center">
+        <img src="https://via.placeholder.com/100?text=Apple" alt="Apple">
+        <p>Apple 🍎</p>
+      </div>
+      <div class="col-4 text-center">
+        <img src="https://via.placeholder.com/100?text=House" alt="House">
+        <p>House 🏠</p>
+      </div>
+      <div class="col-4 text-center">
+        <img src="https://via.placeholder.com/100?text=Cat" alt="Cat">
+        <p>Cat 🐱</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Matching Game -->
+  <div id="match" class="match-section">
+    <h3 class="text-success">Match the Word!</h3>
+    <p>Click to reveal the English word and find its picture!</p>
+    <div class="row">
+      <div class="col-6">
+        <button class="btn btn-outline-secondary w-100 mb-2" onclick="alert('Apple 🍎')">Word 1</button>
+        <button class="btn btn-outline-secondary w-100 mb-2" onclick="alert('House 🏠')">Word 2</button>
+        <button class="btn btn-outline-secondary w-100" onclick="alert('Cat 🐱')">Word 3</button>
+      </div>
+      <div class="col-6">
+        <img src="https://via.placeholder.com/100?text=Apple" class="mb-2" alt="Apple">
+        <img src="https://via.placeholder.com/100?text=House" class="mb-2" alt="House">
+        <img src="https://via.placeholder.com/100?text=Cat" alt="Cat">
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div id="quiz" class="match-section">
+    <h3 class="text-warning">Mini Quiz</h3>
+    <p>What does "Cat" mean?</p>
+    <button class="btn btn-outline-primary d-block mb-2" onclick="checkAnswer(false)">Dog 🐶</button>
+    <button class="btn btn-outline-primary d-block mb-2" onclick="checkAnswer(true)">Cat 🐱</button>
+    <button class="btn btn-outline-primary d-block" onclick="checkAnswer(false)">House 🏠</button>
+    <p id="quiz-result" class="mt-2 fw-bold"></p>
+  </div>
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.match-section').forEach(sec => sec.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+  }
+
+  function checkAnswer(isCorrect) {
+    const result = document.getElementById('quiz-result');
+    result.textContent = isCorrect ? "✅ Correct!" : "❌ Try Again!";
+    result.style.color = isCorrect ? "green" : "red";
+  }
+</script>
+
+</body>
+</html>
