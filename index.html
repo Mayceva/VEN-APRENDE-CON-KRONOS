@@ -14,6 +14,10 @@
       src: url('FlatorySlabCondensed.ttf');
     }
 body {
+
+
+
+
   font-family: sans-serif;
   background:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
@@ -141,6 +145,14 @@ body {
 </head>
 
 <body>
+
+
+  <!-- Barra de búsqueda -->
+<div style="text-align: center; margin-bottom: 20px;">
+  <input id="busquedaUnidad" type="text" placeholder="Buscar unidad..." style="padding: 10px; width: 60%; max-width: 400px; border-radius: 8px; font-size: 16px;">
+  <button onclick="irAUnidad()" style="padding: 10px 20px; font-size: 16px; border-radius: 8px;">Ir</button>
+</div>
+
   
 
 
@@ -536,6 +548,27 @@ window.onload = () => {
   nuevaPalabra();
 };
 </script>
+
+<script>
+  function irAUnidad() {
+    const valor = document.getElementById("busquedaUnidad").value.toLowerCase().trim();
+    if (valor.includes("3 unidad") || valor.includes("unidad 3") || valor === "3") {
+      window.location.href = "3unidad.html"; // Cambia por el nombre real del archivo si es diferente
+    } else {
+      alert("Unidad no encontrada. Intenta escribir '3 unidad'");
+    }
+  }
+
+  // También permite buscar al presionar Enter
+  document.getElementById("busquedaUnidad").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      irAUnidad();
+    }
+  });
+</script>
+
+
+
 
 </body>
 </html>
