@@ -15,6 +15,18 @@
 <header class="hero-logo-container">
     <img class="hero-logo" src="./public/kronos-logo.png" alt="Ark of Learning Logo institucional">
   </header>
+
+<!-- Barra de búsqueda de unidades -->
+<div id="buscador-unidades" style="margin: 20px; text-align: center;">
+  <input type="text" id="busquedaUnidad" placeholder="Escribe la unidad que quieras" 
+         style="padding:10px; width:250px; border-radius:6px; border:1px solid #ccc;">
+  <button onclick="irAUnidad()" 
+          style="padding:10px 20px; border-radius:6px; background-color:#4CAF50; color:white; cursor:pointer;">
+    Ir a unidad
+  </button>
+</div>
+
+
   <script src="./js/load-menu.js"></script>
 
   <div id="menu-container"></div>
@@ -432,6 +444,25 @@ window.onload = () => {
 </script>
 
 
+function irAUnidad() {
+  const valor = document.getElementById("busquedaUnidad").value.toLowerCase().trim();
+
+  // Si escriben "2 medio", redirige a tu página 2medio.html
+  if (valor === "2 medio" || valor === "2° medio") {
+    window.location.href = "2medio.html"; // Cambia por el nombre real de tu archivo
+  } else if (valor === "3 unidad" || valor === "unidad 3" || valor === "3") {
+    window.location.href = "3unidad.html"; // Ya tenías este ejemplo
+  } else {
+    alert("Unidad no encontrada. Intenta escribir '2 medio'");
+  }
+}
+
+// Permitir presionar Enter para buscar
+document.getElementById("busquedaUnidad").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    irAUnidad();
+  }
+});
 
 
 </body>

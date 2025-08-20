@@ -1,125 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>2° Medio - Unit 3</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2° Medio – Unit 3 • Super Interactive</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
-    body { background-color: #f0f8ff; }
-    .title { font-family: 'Comic Sans MS', cursive; color: #2a52be; }
-    .card { cursor: pointer; }
-    .match-section { display: none; }
+    :root{
+      --grad-a:#ffe6f0; --grad-b:#e6f7ff; --brand:#ff4d6d; --ink:#1f295a; --ok:#2ecc71; --warn:#f39c12; --info:#0dcaf0;
+    }
+    html,body{height:100%;}
+    body{background:linear-gradient(120deg,var(--grad-a),var(--grad-b));font-family:"Comic Sans MS",cursive;margin:0;}
+    .navbar{box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .title{color:var(--brand)}
+    .card{cursor:pointer;transition:transform .25s, box-shadow .25s;border-radius:18px}
+    .card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,.12)}
+    .section{display:none;margin-top:28px}
+    .section.active{display:block}
+    .section-header{font-size:28px;font-weight:800;margin:8px 0 18px 0}
+    .vocab-img{width:120px;height:120px;border-radius:14px;object-fit:cover;border:4px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .character{font-size:42px}
+    .pill{display:inline-block;background:#fff;padding:4px 10px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.1);}
+    .game-box{background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 24px rgba(0,0,0,.12)}
+    .btn-fat{padding:.8rem 1.1rem;border-radius:12px}
+
+    /* Drag & Drop (Match Occupation to Place) */
+    .drag-item{user-select:none}
+    .drop-zone{border:2px dashed #c5d0f7;border-radius:12px;min-height:70px;padding:8px;background:#f7f9ff}
+    .drop-zone.correct{border-color:#38c172;background:#eafff1}
+    .drop-zone.wrong{border-color:#e74c3c;background:#fff1f1}
+
+    /* Pronoun & Actions Quiz */
+    .chip{display:inline-block;padding:.4rem .8rem;border-radius:999px;background:#eef2ff;border:1px solid #cdd6ff;margin:.2rem;cursor:pointer}
+    .chip.selected{background:#cfe7ff;border-color:#89c2ff}
+
+    /* Numbers game */
+    .grid20{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .num-card{background:#fff;border-radius:14px;padding:14px;font-size:24px;text-align:center;box-shadow:0 6px 14px rgba(0,0,0,.08);cursor:pointer}
+    .num-card.good{outline:3px solid #2ecc71}
+    .num-card.bad{outline:3px solid #e74c3c}
+
+    /* Mouse Collect Game */
+    #arena{position:relative;height:320px;border-radius:20px;background:linear-gradient(180deg,#fff,#f2fbff);overflow:hidden;border:3px solid #e0f1ff}
+    #player{position:absolute;width:34px;height:34px;border-radius:50%;background:#ff7aa8;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+    .star{position:absolute;width:20px;height:20px;border-radius:50%;background:#ffd54f;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+    #hud{display:flex;gap:12px}
+
+    /* Dress-up game */
+    #dress-area{position:relative;height:340px;background:#fefefe;border:2px dashed #ffd1dc;border-radius:16px}
+    #avatar{position:absolute;left:40%;top:30px;width:160px;height:260px;background:linear-gradient(#ffe0ea,#fff);border-radius:90px 90px 40px 40px/120px 120px 40px 40px;border:3px solid #ffc0cb}
+    .cloth{width:90px;height:60px;border-radius:12px;background:#d0ecff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,.12);cursor:grab}
+    .cloth.hat{background:#ffeaa7}
+    .cloth.shirt{background:#a0e7e5}
+    .cloth.shoes{background:#b4f8c8}
+    #drop-hat,#drop-shirt,#drop-shoes{position:absolute;border:2px dashed #bbb;border-radius:12px}
+    #drop-hat{left:44%;top:-10px;width:80px;height:40px}
+    #drop-shirt{left:41%;top:120px;width:120px;height:70px}
+    #drop-shoes{left:43%;bottom:12px;width:120px;height:40px}
+    .slot-ok{border-color:#2ecc71;background:#eafff1}
+
+    /* Connect Pairs (click-left then click-right) */
+    .pair-board{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .pair-item{background:#fff;padding:10px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer}
+    svg#lineLayer{position:absolute;inset:0;pointer-events:none}
+
+    @media (max-width: 768px){
+      .grid20{grid-template-columns:repeat(4,1fr)}
+      #avatar{left:32%}
+      #drop-hat{left:38%} #drop-shirt{left:31%} #drop-shoes{left:35%}
+    }
   </style>
 </head>
 <body>
+  <!-- NAV -->
+  <nav class="navbar navbar-expand bg-danger sticky-top">
+    <div class="container-fluid">
+      <span class="navbar-brand text-white fw-bold">2° Medio – Unit 3 · Everyday Life!</span>
+      <div class="ms-auto d-flex align-items-center gap-2">
+        <span class="pill">BG Music: <strong id="musicState">On</strong></span>
+        <button id="btnMusic" class="btn btn-outline-light btn-sm">⏸ Pause</button>
+        <a href="index.html" class="btn btn-light btn-sm">← Main</a>
+      </div>
+    </div>
+  </nav>
 
-<!-- Header -->
-<nav class="navbar navbar-light bg-primary">
-  <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1 text-white">2° Medio - Unit 3: Let's Learn!</span>
-    <a href="index.html" class="btn btn-outline-light">← Back to Main</a>
+  <!-- WELCOME -->
+  <div class="container text-center mt-4">
+    <h2 class="title">Welcome to Unit 3 – Learn, drag, match & play! 🎉</h2>
+    <p class="lead">Occupations, places, actions, pronouns and numbers 1–20. Click a card to open a section.</p>
   </div>
-</nav>
 
-<!-- Welcome -->
-<div class="container mt-4 text-center">
-  <h2 class="title">Welcome to Unit 3 - Fun English!</h2>
-  <p>Click on the sections below to learn and play!</p>
-</div>
-
-<!-- Sections -->
-<div class="container mt-4">
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card border-primary" onclick="showSection('vocab')">
-        <div class="card-body text-center">
-          <h5 class="card-title">🗣 Vocabulary</h5>
-          <p class="card-text">Learn key English words with images!</p>
+  <!-- CARDS -->
+  <div class="container mt-3">
+    <div class="row g-4">
+      <div class="col-6 col-md-3">
+        <div class="card border-primary h-100" onclick="show('vocab')">
+          <div class="card-body text-center">
+            <h5 class="card-title">🗣 Vocabulary</h5>
+            <p class="card-text">Words & pictures</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-success h-100" onclick="show('dragmatch')">
+          <div class="card-body text-center">
+            <h5 class="card-title">🎮 Drag & Drop</h5>
+            <p class="card-text">Match jobs → places</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-warning h-100" onclick="show('pronouns')">
+          <div class="card-body text-center">
+            <h5 class="card-title">👤 Pronouns</h5>
+            <p class="card-text">He / She / They</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-info h-100" onclick="show('numbers')">
+          <div class="card-body text-center">
+            <h5 class="card-title">🔢 Numbers</h5>
+            <p class="card-text">Click 1–20</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-secondary h-100" onclick="show('mousegame')">
+          <div class="card-body text-center">
+            <h5 class="card-title">🖱️ Mouse Game</h5>
+            <p class="card-text">Collect the stars</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-danger h-100" onclick="show('dressup')">
+          <div class="card-body text-center">
+            <h5 class="card-title">👗 Dress Up</h5>
+            <p class="card-text">Clothes & actions</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card border-dark h-100" onclick="show('connect')">
+          <div class="card-body text-center">
+            <h5 class="card-title">🔗 Connect</h5>
+            <p class="card-text">Click pairs (job/place)</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card border-success" onclick="showSection('match')">
-        <div class="card-body text-center">
-          <h5 class="card-title">🎮 Matching Game</h5>
-          <p class="card-text">Match English words with pictures!</p>
+  </div>
+
+  <div class="container my-4">
+    <!-- VOCABULARY -->
+    <section id="vocab" class="section">
+      <h3 class="section-header text-primary">📚 Vocabulary</h3>
+      <div class="row g-4">
+        <!-- Occupations -->
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👩‍🏫</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=Teacher" alt="Teacher" />
+          <p class="mt-2">Teacher</p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👨‍🌾</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=Farmer" alt="Farmer" />
+          <p class="mt-2">Farmer</p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👩‍⚕️</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=Nurse" alt="Nurse" />
+          <p class="mt-2">Nurse</p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👩‍🍳</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=Cook" alt="Cook" />
+          <p class="mt-2">Cook</p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">👮‍♂️</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=Police" alt="Police" />
+          <p class="mt-2">Police officer</p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">✈️</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=Pilot" alt="Pilot" />
+          <p class="mt-2">Pilot</p>
+        </div>
+        <!-- Places & actions -->
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">🏫</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=School" alt="School" />
+          <p class="mt-2">School</p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">🏥</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=Hospital" alt="Hospital" />
+          <p class="mt-2">Hospital</p>
+        </div>
+        <div class="col-6 col-md-4 text-center">
+          <div class="character">🍽️</div>
+          <img class="vocab-img" src="https://via.placeholder.com/120?text=Restaurant" alt="Restaurant" />
+          <p class="mt-2">Restaurant</p>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card border-warning" onclick="showSection('quiz')">
-        <div class="card-body text-center">
-          <h5 class="card-title">📝 Mini Quiz</h5>
-          <p class="card-text">Test your knowledge!</p>
+    </section>
+
+    <!-- DRAG & DROP MATCH: job → place -->
+    <section id="dragmatch" class="section">
+      <h3 class="section-header text-success">🎯 Drag & Drop · Match the job with the place</h3>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="game-box">
+            <p class="mb-2"><strong>Drag these jobs:</strong></p>
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="school">Teacher 👩‍🏫</button>
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="farm">Farmer 👨‍🌾</button>
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="hospital">Nurse 👩‍⚕️</button>
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="restaurant">Cook 👩‍🍳</button>
+              <button class="btn btn-outline-primary btn-fat drag-item" draggable="true" data-answer="police">Police officer 👮‍♂️</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="game-box">
+            <p class="mb-2"><strong>Drop on the correct place:</strong></p>
+            <div class="mb-2">🏫 School
+              <div class="drop-zone" data-place="school"></div>
+            </div>
+            <div class="mb-2">🏥 Hospital
+              <div class="drop-zone" data-place="hospital"></div>
+            </div>
+            <div class="mb-2">🍽️ Restaurant
+              <div class="drop-zone" data-place="restaurant"></div>
+            </div>
+            <div class="mb-2">🚓 Police station
+              <div class="drop-zone" data-place="police"></div>
+            </div>
+            <div class="mb-2">🌾 Farm
+              <div class="drop-zone" data-place="farm"></div>
+            </div>
+            <div class="mt-3 d-flex gap-2 align-items-center">
+              <button id="btnCheckDrag" class="btn btn-success">Check</button>
+              <span id="dragScore" class="pill">Score: <b>0</b>/5</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- PRONOUNS & ACTIONS QUIZ -->
+    <section id="pronouns" class="section">
+      <h3 class="section-header text-warning">👤 Pronouns · Choose the correct one</h3>
+      <div class="game-box">
+        <p id="qText" class="fs-5">—</p>
+        <div id="choices"></div>
+        <div class="mt-2" id="qFeedback"></div>
+        <div class="mt-2 d-flex gap-2 align-items-center">
+          <button id="nextQ" class="btn btn-primary">Next</button>
+          <span class="pill">Points: <b id="qPoints">0</b></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NUMBERS 1–20 -->
+    <section id="numbers" class="section">
+      <h3 class="section-header text-info">🔢 Numbers 1–20 · Click the number I say</h3>
+      <div class="game-box">
+        <div class="d-flex justify-content-between align-items-center mb-2" id="hud">
+          <div class="pill">Find: <b id="targetNum">—</b></div>
+          <div class="pill">Correct: <b id="okCount">0</b>/10</div>
+          <div class="pill">Time: <b id="timeLeft">30</b>s</div>
+          <button class="btn btn-outline-dark btn-sm" id="restartNums">Restart</button>
+        </div>
+        <div class="grid20" id="numGrid"></div>
+        <audio id="sayAudio"></audio>
+      </div>
+    </section>
+
+    <!-- MOUSE COLLECT GAME -->
+    <section id="mousegame" class="section">
+      <h3 class="section-header text-secondary">🖱️ Collect the Stars (move your mouse)</h3>
+      <div class="game-box">
+        <div class="d-flex justify-content-between align-items-center mb-2" id="hud2">
+          <span class="pill">Stars: <b id="stars">0</b></span>
+          <span class="pill">Time: <b id="timer">30</b>s</span>
+          <button class="btn btn-outline-primary btn-sm" id="startMouse">Start</button>
+        </div>
+        <div id="arena" class="mb-2">
+          <div id="player"></div>
+        </div>
+        <small class="text-muted">Tip: Move the mouse inside the box to collect stars ⭐</small>
+      </div>
+    </section>
+
+    <!-- DRESS UP (clothes) -->
+    <section id="dressup" class="section">
+      <h3 class="section-header" style="color:#e83e8c">👗 Dress up the character (drag clothes)</h3>
+      <div class="row g-3">
+        <div class="col-md-7">
+          <div id="dress-area" class="game-box position-relative">
+            <div id="avatar"></div>
+            <div id="drop-hat"></div>
+            <div id="drop-shirt"></div>
+            <div id="drop-shoes"></div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="game-box d-grid gap-2">
+            <div class="cloth hat" draggable="true" data-slot="hat">🎩 Hat</div>
+            <div class="cloth shirt" draggable="true" data-slot="shirt">👕 Shirt</div>
+            <div class="cloth shoes" draggable="true" data-slot="shoes">👟 Shoes</div>
+            <div class="mt-2"><span class="pill">Outfit: <b id="outfitScore">0</b>/3</span></div>
+            <div class="mt-1" id="dressMsg"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECT PAIRS (click left then right) -->
+    <section id="connect" class="section position-relative">
+      <svg id="lineLayer"></svg>
+      <h3 class="section-header text-dark">🔗 Connect pairs: job → place</h3>
+      <div class="pair-board">
+        <div>
+          <div class="pair-item" data-side="L" data-key="teacher">Teacher 👩‍🏫</div>
+          <div class="pair-item" data-side="L" data-key="farmer">Farmer 👨‍🌾</div>
+          <div class="pair-item" data-side="L" data-key="nurse">Nurse 👩‍⚕️</div>
+          <div class="pair-item" data-side="L" data-key="cook">Cook 👩‍🍳</div>
+          <div class="pair-item" data-side="L" data-key="police">Police officer 👮‍♂️</div>
+        </div>
+        <div>
+          <div class="pair-item" data-side="R" data-key="restaurant">🍽️ Restaurant</div>
+          <div class="pair-item" data-side="R" data-key="police">🚓 Police station</div>
+          <div class="pair-item" data-side="R" data-key="school">🏫 School</div>
+          <div class="pair-item" data-side="R" data-key="hospital">🏥 Hospital</div>
+          <div class="pair-item" data-side="R" data-key="farm">🌾 Farm</div>
+        </div>
+      </div>
+      <div class="mt-3 d-flex gap-2 align-items-center">
+        <button class="btn btn-dark" id="resetConnect">Reset</button>
+        <span class="pill">Pairs: <b id="pairScore">0</b>/5</span>
+      </div>
+    </section>
+
   </div>
-</div>
 
-<!-- Sections Content -->
-<div class="container mt-5">
-  <!-- Vocabulary -->
-  <div id="vocab" class="match-section">
-    <h3 class="text-primary">Vocabulary</h3>
-    <div class="row">
-      <div class="col-4 text-center">
-        <img src="https://via.placeholder.com/100?text=Apple" alt="Apple">
-        <p>Apple 🍎</p>
-      </div>
-      <div class="col-4 text-center">
-        <img src="https://via.placeholder.com/100?text=House" alt="House">
-        <p>House 🏠</p>
-      </div>
-      <div class="col-4 text-center">
-        <img src="https://via.placeholder.com/100?text=Cat" alt="Cat">
-        <p>Cat 🐱</p>
-      </div>
-    </div>
-  </div>
+  <!-- BACKGROUND MUSIC (replace the src with your Pou .mp3 file name) -->
+  <audio id="bgm" loop autoplay>
+    <!-- Replace with your file: pou-theme.mp3 located next to this HTML -->
+    <source src="pou-theme.mp3" type="audio/mpeg" />
+  </audio>
 
-  <!-- Matching Game -->
-  <div id="match" class="match-section">
-    <h3 class="text-success">Match the Word!</h3>
-    <p>Click to reveal the English word and find its picture!</p>
-    <div class="row">
-      <div class="col-6">
-        <button class="btn btn-outline-secondary w-100 mb-2" onclick="alert('Apple 🍎')">Word 1</button>
-        <button class="btn btn-outline-secondary w-100 mb-2" onclick="alert('House 🏠')">Word 2</button>
-        <button class="btn btn-outline-secondary w-100" onclick="alert('Cat 🐱')">Word 3</button>
-      </div>
-      <div class="col-6">
-        <img src="https://via.placeholder.com/100?text=Apple" class="mb-2" alt="Apple">
-        <img src="https://via.placeholder.com/100?text=House" class="mb-2" alt="House">
-        <img src="https://via.placeholder.com/100?text=Cat" alt="Cat">
-      </div>
-    </div>
-  </div>
+  <script>
+    // UTIL
+    const byId = (id)=>document.getElementById(id);
+    const fire = ()=> confetti({particleCount:120, spread:70, origin:{y:.6}});
 
-  <!-- Quiz -->
-  <div id="quiz" class="match-section">
-    <h3 class="text-warning">Mini Quiz</h3>
-    <p>What does "Cat" mean?</p>
-    <button class="btn btn-outline-primary d-block mb-2" onclick="checkAnswer(false)">Dog 🐶</button>
-    <button class="btn btn-outline-primary d-block mb-2" onclick="checkAnswer(true)">Cat 🐱</button>
-    <button class="btn btn-outline-primary d-block" onclick="checkAnswer(false)">House 🏠</button>
-    <p id="quiz-result" class="mt-2 fw-bold"></p>
-  </div>
-</div>
+    // SECTION NAV
+    function show(id){
+      document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+      byId(id).classList.add('active');
+      window.scrollTo({top:document.querySelector('#'+id).offsetTop - 60, behavior:'smooth'});
+    }
 
-<script>
-  function showSection(id) {
-    document.querySelectorAll('.match-section').forEach(sec => sec.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-  }
+    // MUSIC
+    const bgm = byId('bgm');
+    const btnMusic = byId('btnMusic');
+    const musicState = byId('musicState');
+    btnMusic.addEventListener('click',()=>{
+      if(bgm.paused){ bgm.play(); btnMusic.textContent='⏸ Pause'; musicState.textContent='On'; }
+      else{ bgm.pause(); btnMusic.textContent='▶ Play'; musicState.textContent='Off'; }
+    });
 
-  function checkAnswer(isCorrect) {
-    const result = document.getElementById('quiz-result');
-    result.textContent = isCorrect ? "✅ Correct!" : "❌ Try Again!";
-    result.style.color = isCorrect ? "green" : "red";
-  }
-</script>
+    // DRAG & DROP (jobs → places)
+    let dragScore=0;
+    document.querySelectorAll('.drag-item').forEach(el=>{
+      el.addEventListener('dragstart',e=>{
+        e.dataTransfer.setData('text/plain', el.dataset.answer+':'+el.textContent.trim());
+      });
+    });
+    document.querySelectorAll('.drop-zone').forEach(zone=>{
+      zone.addEventListener('dragover',e=>e.preventDefault());
+      zone.addEventListener('drop',e=>{
+        e.preventDefault();
+        const data=e.dataTransfer.getData('text/plain');
+        const [ans,label]=data.split(':');
+        // place only one item per zone
+        if(zone.querySelector('.pill')) return;
+        const tag=document.createElement('span');
+        tag.className='pill me-1';
+        tag.textContent=label;
+        tag.dataset.ans=ans;
+        zone.appendChild(tag);
+        zone.classList.remove('correct','wrong');
+      });
+    });
+    byId('btnCheckDrag').addEventListener('click',()=>{
+      dragScore=0;
+      document.querySelectorAll('.drop-zone').forEach(zone=>{
+        const chip=zone.querySelector('.pill');
+        if(!chip){ zone.classList.add('wrong'); return; }
+        if(chip.dataset.ans===zone.dataset.place){
+          zone.classList.remove('wrong'); zone.classList.add('correct'); dragScore++;
+        }else{ zone.classList.remove('correct'); zone.classList.add('wrong'); }
+      });
+      byId('dragScore').innerHTML = `Score: <b>${dragScore}</b>/5`;
+      if(dragScore===5) fire();
+    });
 
+    // PRONOUN QUIZ
+    const bank=[
+      {sent:"___ is cooking at the restaurant.", opts:['He','She','They'], ok:1},
+      {sent:"___ are playing at school.", opts:['He','She','They'], ok:2},
+      {sent:"___ is a nurse at the hospital.", opts:['He','She','They'], ok:1},
+      {sent:"___ is a farmer on the farm.", opts:['He','She','They'], ok:0},
+      {sent:"___ are not at the police station.", opts:['He','She','They'], ok:2},
+    ];
+    let qi=0, qPoints=0;
+    function loadQ(){
+      const q=bank[qi%bank.length];
+      byId('qText').innerHTML=q.sent;
+      const wrap=byId('choices'); wrap.innerHTML='';
+      q.opts.forEach((t,i)=>{
+        const c=document.createElement('span');
+        c.className='chip'; c.textContent=t;
+        c.onclick=()=> sel(i);
+        wrap.appendChild(c);
+      });
+      byId('qFeedback').textContent='';
+    }
+    function sel(i){
+      const q=bank[qi%bank.length];
+      const chips=[...document.querySelectorAll('#choices .chip')];
+      chips.forEach(ch=>ch.classList.remove('selected'));
+      chips[i].classList.add('selected');
+      if(i===q.ok){ byId('qFeedback').innerHTML='✅ Correct!'; qPoints+=10; fire(); }
+      else{ byId('qFeedback').innerHTML='❌ Try again.'; qPoints=Math.max(0,qPoints-2); }
+      byId('qPoints').textContent=qPoints;
+    }
+    byId('nextQ').onclick=()=>{ qi++; loadQ(); };
+    loadQ();
+
+    // NUMBERS GAME 1–20
+    const numbers=[...Array(20)].map((_,i)=>i+1);
+    let target, okCount=0, timeLeft=30, timerInt=null, asked=[];
+    const grid=byId('numGrid');
+    function renderGrid(){
+      grid.innerHTML='';
+      numbers.forEach(n=>{
+        const d=document.createElement('div');
+        d.className='num-card'; d.textContent=n;
+        d.onclick=()=>pick(n,d);
+        grid.appendChild(d);
+      })
+    }
+    function say(txt){
+      // simple speech using SpeechSynthesis if available
+      if('speechSynthesis' in window){
+        const u=new SpeechSynthesisUtterance('Find ' + txt);
+        u.lang='en-US'; window.speechSynthesis.speak(u);
+      }
+    }
+    function newTarget(){
+      const pool=numbers.filter(n=>!asked.includes(n));
+      if(pool.length===0){ endNums(); return; }
+      target=pool[Math.floor(Math.random()*pool.length)];
+      asked.push(target);
+      byId('targetNum').textContent=target;
+      say(target);
+    }
+    function tick(){ timeLeft--; byId('timeLeft').textContent=timeLeft; if(timeLeft<=0) endNums(); }
+    function startNums(){ okCount=0; asked=[]; timeLeft=30; byId('okCount').textContent=okCount; byId('timeLeft').textContent=timeLeft; renderGrid(); newTarget(); clearInterval(timerInt); timerInt=setInterval(tick,1000); }
+    function endNums(){ clearInterval(timerInt);
+      const msg = okCount>=8? 'Great job! 🎉':'Nice try! 👍';
+      alert(`Score: ${okCount}/10\n${msg}`); if(okCount>=8) fire(); }
+    function pick(n,el){
+      if(n===target){ okCount++; el.classList.add('good'); byId('okCount').textContent=okCount; if(okCount>=10){ endNums(); } else newTarget(); }
+      else{ el.classList.add('bad'); }
+    }
+    byId('restartNums').onclick=startNums; renderGrid();
+
+    // MOUSE COLLECT GAME
+    const arena=byId('arena'); const player=byId('player');
+    let stars=0, time2=30, loop=null, t2=null, running=false;
+    function spawnStar(){
+      const s=document.createElement('div'); s.className='star';
+      s.style.left=Math.random()*(arena.clientWidth-20)+'px';
+      s.style.top=Math.random()*(arena.clientHeight-20)+'px';
+      arena.appendChild(s);
+      setTimeout(()=> s.remove(), 4000);
+    }
+    function startMouse(){
+      if(running) return; running=true; stars=0; time2=30; byId('stars').textContent=0; byId('timer').textContent=time2;
+      [...arena.querySelectorAll('.star')].forEach(e=>e.remove());
+      loop=setInterval(spawnStar,500); t2=setInterval(()=>{ time2--; byId('timer').textContent=time2; if(time2<=0) stopMouse(); },1000);
+      fire();
+    }
+    function stopMouse(){ running=false; clearInterval(loop); clearInterval(t2); alert(`You collected ${stars} ⭐`); if(stars>=25) fire(); }
+    byId('startMouse').onclick=startMouse;
+    arena.addEventListener('mousemove',e=>{
+      const rect=arena.getBoundingClientRect();
+      const x=e.clientX-rect.left-17; const y=e.clientY-rect.top-17;
+      player.style.transform=`translate(${x}px,${y}px)`;
+      // collision
+      arena.querySelectorAll('.star').forEach(st=>{
+        const sx=parseFloat(st.style.left), sy=parseFloat(st.style.top);
+        if(Math.hypot(sx - x, sy - y) < 24){ stars++; byId('stars').textContent=stars; st.remove(); }
+      })
+    });
+
+    // DRESS UP (drag to slots)
+    document.querySelectorAll('.cloth').forEach(c=>{
+      c.addEventListener('dragstart',e=>{ e.dataTransfer.setData('text/plain', c.dataset.slot+':'+c.textContent.trim()); });
+    });
+    [['drop-hat','hat'],['drop-shirt','shirt'],['drop-shoes','shoes']].forEach(([id,slot])=>{
+      const z=byId(id);
+      z.addEventListener('dragover',e=>e.preventDefault());
+      z.addEventListener('drop',e=>{ e.preventDefault(); const data=e.dataTransfer.getData('text/plain'); const [key,label]=data.split(':'); if(key!==slot) return;
+        if(z.querySelector('.pill')) return; const tag=document.createElement('span'); tag.className='pill'; tag.textContent=label; z.appendChild(tag); z.classList.add('slot-ok');
+        const count=document.querySelectorAll('.slot-ok').length; byId('outfitScore').textContent=count; byId('dressMsg').textContent = sentenceFor(slot);
+        if(count===3){ fire(); byId('dressMsg').textContent += ' Awesome outfit!'; }
+      })
+    });
+    function sentenceFor(slot){
+      if(slot==='hat') return 'He is wearing a hat.';
+      if(slot==='shirt') return 'She is wearing a shirt.';
+      return 'They are wearing shoes.';
+    }
+
+    // CONNECT (click-left → click-right) with SVG lines
+    const lineLayer = byId('lineLayer');
+    let selLeft=null, pairs=0; const map={teacher:'school', farmer:'farm', nurse:'hospital', cook:'restaurant', police:'police'};
+    function xy(el){ const r=el.getBoundingClientRect(); return {x:r.left + r.width/2 + window.scrollX, y:r.top + r.height/2 + window.scrollY}; }
+    function drawLine(a,b){ const p1=xy(a), p2=xy(b); const path=document.createElementNS('http://www.w3.org/2000/svg','line'); path.setAttribute('x1',p1.x); path.setAttribute('y1',p1.y); path.setAttribute('x2',p2.x); path.setAttribute('y2',p2.y); path.setAttribute('stroke','#8e44ad'); path.setAttribute('stroke-width','4'); path.setAttribute('stroke-linecap','round'); lineLayer.appendChild(path); }
+    function clearLines(){ lineLayer.innerHTML=''; }
+    document.querySelectorAll('#connect .pair-item').forEach(it=>{
+      it.addEventListener('click',()=>{
+        const side=it.dataset.side;
+        if(side==='L'){ selLeft=it; document.querySelectorAll('#connect .pair-item').forEach(n=>n.classList.remove('selected')); it.classList.add('selected'); }
+        else if(selLeft){
+          const keyL=selLeft.dataset.key; const keyR=it.dataset.key; drawLine(selLeft,it);
+          if(map[keyL]===keyR){ pairs++; byId('pairScore').textContent=pairs; fire(); selLeft.classList.add('disabled'); it.classList.add('disabled'); selLeft=null; if(pairs===5) alert('Great matching!'); }
+          else{ setTimeout(()=>{ clearLines(); pairs=0; byId('pairScore').textContent=pairs; }, 400); }
+        }
+      })
+    });
+    byId('resetConnect').onclick=()=>{ pairs=0; byId('pairScore').textContent=pairs; clearLines(); document.querySelectorAll('#connect .pair-item').forEach(n=>n.classList.remove('disabled','selected')); };
+
+    // Default open first section
+    show('vocab');
+  </script>
 </body>
 </html>
