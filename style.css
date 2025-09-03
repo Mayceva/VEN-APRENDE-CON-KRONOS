@@ -1,54 +1,40 @@
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
 @font-face {
-    font-family: 'Flatory Slab Condensed';
-    src: url('FlatorySlabCondensed.ttf');
+  font-family: 'Flatory Slab Condensed';
+  src: url('FlatorySlabCondensed.ttf');
 }
 
 body {
-    font-family: sans-serif;
-
-    background-color: #265219e7;
-    margin: 0;
-    padding: 20px;
-    align-items: center;
+  font-family: sans-serif;
+  background-color: #265219e7;
+  margin: 0;
+  padding: 20px;
+  align-items: center;
 }
 
-
-h1,
-h2,
-h3 {
-    text-align: center;
-    color: #701e1ee0;
-    font-family: 'Flatory Slab Condensed', sans-serif;
+h1, h2, h3 {
+  text-align: center;
+  color: #701e1ee0;
+  font-family: 'Flatory Slab Condensed', sans-serif;
 }
 
 .contenedor {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    align-items: "center";
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
 }
-s
-
 
 iframe {
-    width: 100%;
-    max-width: 795px;
-    height: 690px;
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(228, 38, 193, 0.2);
+  width: 100%;
+  max-width: 795px;
+  height: 690px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(228, 38, 193, 0.2);
 }
 
-
-
-
-/*top bar*/
-
-css menu .top-bar {
+/* Top bar */
+.top-bar {
   background-color: #fefefe;
   padding: 10px 40px;
   display: flex;
@@ -77,11 +63,11 @@ css menu .top-bar {
   padding: 0;
 }
 
-.main-nav ul.menu>li {
+.main-nav ul.menu > li {
   position: relative;
 }
 
-.main-nav ul.menu>li>a {
+.main-nav ul.menu > li > a {
   text-decoration: none;
   font-weight: bold;
   color: #ffffff;
@@ -90,10 +76,11 @@ css menu .top-bar {
   transition: color 0.3s ease;
 }
 
-.main-nav ul.menu>li>a:hover {
+.main-nav ul.menu > li > a:hover {
   color: #97ce31;
 }
 
+/* Mega menú */
 .has-dropdown:hover .mega-menu {
   opacity: 1;
   visibility: visible;
@@ -141,6 +128,7 @@ css menu .top-bar {
   color: #a479bd;
 }
 
+/* Botón menú */
 .menu-toggle {
   display: none;
   background: none;
@@ -150,6 +138,7 @@ css menu .top-bar {
   color: #003d6a;
 }
 
+/* Logo hero */
 .hero-logo-container {
   position: absolute;
   top: 0px;
@@ -158,17 +147,24 @@ css menu .top-bar {
   background-color: rgba(255, 255, 255, 0);
   padding: 8px;
   border-radius: 10px;
-
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .hero-logo {
-  height: 100px;
+  height: 60px;
   width: auto;
   display: block;
   border-radius: 6px;
 }
 
-/* CONTENEDOR DE LOGO + CARD */
+.hero-title {
+  font-size: 2rem;
+  color: #fff;
+}
+
+/* Card con logo */
 .card-content-with-logo {
   display: flex;
   justify-content: center;
@@ -190,9 +186,10 @@ css menu .top-bar {
   margin-top: 0px;
   margin-bottom: 0px;
   width: 80%;
-
   border-radius: 12px;
 }
+
+/* Submenús */
 .has-submenu {
   position: relative;
 }
@@ -200,7 +197,7 @@ css menu .top-bar {
 .has-submenu .submenu {
   display: none;
   position: absolute;
-  left: 100%; /* se abre al lado derecho */
+  left: 100%;
   top: 0;
   background: #fff;
   padding: 10px;
@@ -225,76 +222,53 @@ css menu .top-bar {
 }
 
 .submenu a:hover {
-  background: #f0f0f0;
-}
-/* Para que cada letra tenga espacio */
-#menu-container a {
-  display: inline-block;       /* Asegura que se respete el padding */
-  margin: 5px;                 /* Espacio externo entre los enlaces */
-  padding: 8px 12px;           /* Espacio interno alrededor del texto */
-  letter-spacing: 3px;         /* Espacio extra entre cada letra */
-  text-decoration: none;       /* Quita el subrayado */
-  color: black;                /* Color del texto */
-  font-size: 18px;             /* Tamaño de fuente */
-  border-radius: 6px;          /* Bordes redondeados */
-  transition: background 0.3s; /* Animación al pasar el mouse */
+  background: #a3d34b;
 }
 
-/* Efecto hover */
+/* Estilos menú */
+#menu-container a {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 12px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
 #menu-container a:hover {
   background-color: #95cc2ed0;
   color: #fff;
 }
-/* Logo y menú siempre por encima */
-/* Carrusel grande y semi-transparente */
+
+/* Carrusel */
 .carousel {
   position: relative;
-  z-index: 1;              /* el carrusel queda al fondo */
+  z-index: 1;
 }
 
 .carousel-inner img {
-  height: 90vh;            /* carrusel ocupa casi toda la pantalla */
-  object-fit: cover;       /* ajusta las imágenes */
-  opacity: 0.6;            /* semi-transparencia */
+  height: 90vh;
+  object-fit: cover;
+  opacity: 0.6;
 }
 
-/* Logo, menú y títulos encima */
 .hero-logo-container,
 #menu-container,
 h1, h2, h3 {
   position: relative;
-  z-index: 10;             /* encima del carrusel */
+  z-index: 10;
 }
 
-/* Opcional: darles fondo para que resalten */
 #menu-container {
-  background: rgba(26, 88, 59, 0.9); 
+  background: rgba(26, 88, 59, 0.9);
   padding: 10px;
   border-radius: 8px;
 }
 
-.hero-logo-container {
-  background: rgba(255,255,255,0); /* transparente */
-  padding: 8px;
-}
-
-.hero-logo-container {
-  display: flex;            /* Para poner elementos en fila */
-  align-items: center;      /* Centra verticalmente logo y texto */
-  gap: 15px;                /* Espacio entre logo y título */
-}
-
-.hero-logo {
-  height: 60px;             /* Ajusta tamaño del logo */
-}
-
-.hero-title {
-  font-size: 2rem;
-  color: #fff;              /* Cambia según tu diseño */
-}
+/* Modal */
 .modal {
-  z-index: 1055; /* Bootstrap por defecto usa 1050 */
-}
-.modal {
-  z-index: 2000; /* suficientemente alto */
+  z-index: 2000; 
 }
