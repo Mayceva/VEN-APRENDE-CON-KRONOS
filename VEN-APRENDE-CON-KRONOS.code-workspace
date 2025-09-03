@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../OneDrive/Escritorio/PAGINADE UNUDIAD 3"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "VEN-APRENDE-CON-KRONOS",
+		"liveServer.settings.port": 5501
+	}
+}
