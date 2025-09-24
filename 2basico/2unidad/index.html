@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego de Colores - Color Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🎨 Juego de Colores / Color Game</h1>
+  <p>Arrastra el nombre del color y suéltalo sobre el color correcto. <br> Drag the color name to the correct color.</p>
+
+  <div class="game-container">
+    <div class="words">
+      <!-- Drag items (color names) -->
+      <div class="draggable" draggable="true" id="rojo">Rojo / Red</div>
+      <div class="draggable" draggable="true" id="azul">Azul / Blue</div>
+      <div class="draggable" draggable="true" id="verde">Verde / Green</div>
+      <div class="draggable" draggable="true" id="amarillo">Amarillo / Yellow</div>
+    </div>
+
+    <div class="colors">
+      <!-- Drop targets (color boxes) -->
+      <div class="dropzone" data-color="rojo" style="background-color: red;"></div>
+      <div class="dropzone" data-color="azul" style="background-color: blue;"></div>
+      <div class="dropzone" data-color="verde" style="background-color: green;"></div>
+      <div class="dropzone" data-color="amarillo" style="background-color: yellow;"></div>
+    </div>
+  </div>
+
+  <div id="message"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -2,80 +2,87 @@
   <link rel="stylesheet" href="../style.css">
   <div class="top-bar">
     <button class="menu-toggle" onclick="document.querySelector('.main-nav').classList.toggle('active')">
-      ☰ Menu
+      
     </button>
+
+    <body>
+  <!-- Sección de biografía -->
+  <section class="bio">
+    <div class="bio-content">
+      <h1>Bienvenidos a mi página</h1>
+      <p>
+        Soy [Tu Nombre], y este sitio está dedicado a [tema de la página].  
+        Aquí encontrarás material educativo, actividades interactivas y
+        recursos diseñados para apoyar el aprendizaje desde 1º hasta 4º básico.  
+      </p>
+      <p>
+        Mi objetivo es fomentar el aprendizaje inclusivo y divertido, integrando
+        inglés y español en cada curso.  
+      </p>
+    </div>
+  </section>
     <nav class="main-nav">
       <ul class="menu">
-        <li><a href="index.html"></a></li>
+        <li><a href="index.html">INICIO - START</a></li>
 
-      
+         <li class="has-dropdown">
+          <a href="#">INTRODUCCION - INTRODUCTION</a>
 
-    <li class="has-dropdown">
-  <a href="#">CURSOS</a>
-  <div class="mega-menu">
-    <div class="mega-column">
-      
-      <!-- 1 BÁSICO -->
-      <div class="has-submenu">
-        <a href="#">1 BÁSICO/ 1 BASIC▸</a>
-        <ul class="submenu">
-          <li><a href="/1basico/unidad1.html">Unidad 1</a></li>
-          <li><a href="/1basico/unidad2.html">Unidad 2</a></li>
-          <li><a href="/1basico/unidad3.html">Unidad 3</a></li>
-          <li><a href="/1basico/unidad4.html">Unidad 4</a></li>
-        </ul>
-      </div>
+        <li class="has-dropdown">
+          <a href="#">CURSOS - GRADES</a>
+          <div class="mega-menu">
+            <div class="courses-grid">
 
-      <!-- 2 BÁSICO -->
-      <div class="has-submenu">
-        <a href="#">2 BÁSICO / 2 BASIC▸</a>
-        <ul class="submenu">
-          <li><a href="/2basico/1unidad/index.html">Unidad 1</a></li>
-          <li><a href="/2basico/unidad2.html">Unidad 2</a></li>
-          <li><a href="/2basico/Unidad 3/3unidad.html">Unidad 3</a></li>
-          <li><a href="/2basico/4unidad/html/index.html">Unidad 4</a></li>
-        </ul>
-      </div>
+              <!-- 1 BÁSICO -->
+              <div class="course-card">
+                <h3>1 BÁSICO<br><span>1 Elementary Grade</span></h3>
+                <ul>
+                  <li><a href="/1basico/unidad1.html">Unidad 1</a></li>
+                  <li><a href="/1basico/unidad2.html">Unidad 2</a></li>
+                  <li><a href="/1basico/unidad3.html">Unidad 3</a></li>
+                  <li><a href="/1basico/unidad4.html">Unidad 4</a></li>
+                </ul>
+              </div>
 
-      <!-- 3 BÁSICO -->
-      <div class="has-submenu">
-        <a href="#">3 BÁSICO / 3 BASIC▸ </a>
-        <ul class="submenu">
-          <li><a href="/3basico/unidad1.html">Unidad 1</a></li>
-          <li><a href="/3basico/unidad2.html">Unidad 2</a></li>
-          <li><a href="/3basico/unidad3.html">Unidad 3</a></li>
-          <li><a href="/3basico/unidad4.html">Unidad 4</a></li>
-        </ul>
-      </div>
+              <!-- 2 BÁSICO -->
+              <div class="course-card">
+                <h3>2 BÁSICO<br><span>2 Elementary Grade</span></h3>
+                <ul>
+                  <li><a href="/2basico/1unidad/index.html">Unidad 1</a></li>
+                  <li><a href="/2basico/2unidad/index.html">Unidad 2</a></li>
+                  <li><a href="/2basico/2basico_3unidad/3unidad.html">Unidad 3</a></li>
+                  <li><a href="/2basico/4unidad/html/index.html">Unidad 4</a></li>
+                </ul>
+              </div>
 
-      <!-- 4 BÁSICO -->
-      <div class="has-submenu">
-        <a href="#">4 BÁSICO / 4 BASIC▸</a>
-        <ul class="submenu">
-          <li><a href="/unidad4cuartobasico/unidad1.html">Unidad 1</a></li>
-          <li><a href="/unidad4cuartobasico/unidad2.html">Unidad 2</a></li>
-          <li><a href="/unidad4cuartobasico/unidad3.html">Unidad 3</a></li>
-          <li><a href="/4basico/4unidad/index.html">Unidad 4</a></li>
-        </ul>
-      </div>
+              <!-- 3 BÁSICO -->
+              <div class="course-card">
+                <h3>3 BÁSICO<br><span>3 Elementary Grade</span></h3>
+                <ul>
+                  <li><a href="/3basico/unidad1.html">Unidad 1</a></li>
+                  <li><a href="/3basico/unidad2.html">Unidad 2</a></li>
+                  <li><a href="/3basico/unidad3.html">Unidad 3</a></li>
+                  <li><a href="/3basico/unidad4.html">Unidad 4</a></li>
+                </ul>
+              </div>
 
-    </div>
-  </div>
-</li>
+              <!-- 4 BÁSICO -->
+              <div class="course-card">
+                <h3>4 BÁSICO<br><span>4 Elementary Grade</span></h3>
+                <ul>
+                  <li><a href="/unidad4cuartobasico/unidad1.html">Unidad 1</a></li>
+                  <li><a href="/unidad4cuartobasico/unidad2.html">Unidad 2</a></li>
+                  <li><a href="/unidad4cuartobasico/unidad3.html">Unidad 3</a></li>
+                  <li><a href="/4basico/4unidad/index.html">Unidad 4</a></li>
+                </ul>
+              </div>
 
+               <li class="has-dropdown">
+          <a href="#">CONTACTOS - CONTACT</a>
 
-
-
-<
-
-      
-      
-
-  
-      
-       
-      
-
+            </div>
+          </div>
+        </li>
       </ul>
     </nav>
   </div>
