@@ -74,15 +74,26 @@
     <section id="intro">
       <h2>Introducción</h2>
       <p>
-        El Liceo Bicentenario Kronos busca integrar la interculturalidad, el 
-        aprendizaje bilingüe y la innovación en la enseñanza.
+        Este proyecto fue creado para que nuestros compañeros aprendan. Este proyecto esta divido en curso y unidades que fueron hechas por nostros mismos.
+        Utilizando lenguajes como JavaScript , HTML que es un lenguaje de marcado de hipertexto o en pocas palabras programando para que hoy en dia ustedes aprendan.
       </p>
     </section>
 
     <!-- 3. CURSOS -->
-     <link href="./partials/menu.html">
-  
-    </section>
+    <section id="cursos">
+  <h1>Nuestros Cursos</h1>
+  <p>Juega mientras aprendes:</p>
+  <div id="contenedor-cursos"></div>
+</section>
+
+<script>
+  fetch("./partials/menu.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("contenedor-cursos").innerHTML = data;
+    });
+</script>
+
 
     <!-- 4. CONTACTO -->
     <section id="contacto">
