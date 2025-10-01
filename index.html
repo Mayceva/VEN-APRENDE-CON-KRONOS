@@ -55,45 +55,131 @@
 
   <!-- SECCIONES -->
   <main>
-   <!-- 1. BIO -->
-<section id="bio" class="active">
-  <h2>Bienvenidos a Kronos</h2>
+    <!-- 1. BIO -->
+    <section id="bio" class="active">
+      <h2>Bienvenidos a Kronos</h2>
 
-  <div class="historia-card">
-    <h3 class="historia-title">Nuestra Historia</h3>
-    <img src="https://i.postimg.cc/pVYzMMFX/todos.jpg" alt="Imagen de la historia" class="historia-img">
-    <p class="historia-text">
-     Somos estudiantes de 4to programación , el cuál iniciamos un proyecto con el fin de poder educar mientras juegan nuestros compañeros más pequeños... 
-     Para nosotros en un placer hoy haber podido dejar un legado en el Liceo Bicentenario Kronos.Solo esperamos que nuestros compañeros puedan disfrutar de este reforzamiento de inglés.
-    Este proyecto fué hecho en diferentes etapas durante el trayecto y el transcurso de los días.</p>
+      <div class="historia-card">
+        <h3 class="historia-title">Nuestra Historia</h3>
+        <!-- Aqui colocamos el carrusel -->
+        <div id="demo" class="carousel slide" data-bs-ride="carousel" style="max-height: 400px; overflow: hidden;">
+          <!-- Indicators/dots -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="https://i.postimg.cc/pVYzMMFX/todos.jpg" class="d-block w-100" alt="Foto del curso">
+            </div>
+            <div class="carousel-item">
+              <img src="https://i.postimg.cc/wjyd1p0H/unnamed.png" class="d-block w-100" alt="Chicas programadoras">
+            </div>
+            <div class="carousel-item">
+              <img src="https://i.postimg.cc/SsBJXdpC/caporal.png" class="d-block w-100" alt="Programadores Caporales">
+            </div>
+          </div>
+
+          <!-- Controls/arrows -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <p class="historia-text" style="margin-top: 20px;">
+          Somos estudiantes de 4to programación , el cuál iniciamos un proyecto con el fin de poder educar mientras juegan nuestros compañeros más pequeños... 
+          Para nosotros en un placer hoy haber podido dejar un legado en el Liceo Bicentenario Kronos.Solo esperamos que nuestros compañeros puedan disfrutar de este reforzamiento de inglés.
+          Este proyecto fué hecho en diferentes etapas durante el trayecto y el transcurso de los días.
+        </p>
+      </div>
+    </section>
+
+    <!-- 2. INTRO -->
+    <section id="intro" class="intro-section">
+  <div class="container py-5">
+    <!-- Título con emojis -->
+    <h1 class="mb-4 text-center">
+      🌍✨ ¡Bienvenido a <span style="color:#ff9800;">Kronos</span>! ✨🌍
+    </h1>
+
+    <!-- Texto atractivo -->
+    <p class="lead text-center" style="font-size: 1.3rem;">
+      En <b>Liceo Bicentenario Kronos</b> creemos que aprender puede ser 
+      divertido 🎮📚.  
+      Aquí podrás explorar, jugar y descubrir nuevas formas de aprender inglés mientras disfrutas 🤩💡.
+      Tambien queremos enseñarles cuàl fuè el procedimiento de esta creaciòn:
+      Nos dividimos en 8 grupos , al cuàl a cada grupo le tocò un curso y una unidad para ustedes ...Compañeros màs pequeños .
+      En un tiempo limitado el profesor Marcos no hizo trabajar en la sala de innovaciòn (con los computadores), para poder hacer esta pàgina y que de esa manera ustedes aprendan.
+    </p>
+
+    <!-- Fila de imágenes con animación -->
+    <div class="row mt-5">
+      <div class="col-md-4 mb-3">
+        <img src="https://i.postimg.cc/wjyd1p0H/unnamed.png" 
+             class="img-fluid rounded shadow-sm intro-img" 
+             alt="Chicas programadoras">
+      </div>
+      <div class="col-md-4 mb-3">
+        <img src="https://i.postimg.cc/pVYzMMFX/todos.jpg" 
+             class="img-fluid rounded shadow-sm intro-img" 
+             alt="Estudiantes Kronos">
+      </div>
+      <div class="col-md-4 mb-3">
+        <img src="https://i.postimg.cc/SsBJXdpC/caporal.png" 
+             class="img-fluid rounded shadow-sm intro-img" 
+             alt="Caporales Kronos">
+      </div>
+    </div>
+
+
+    <!-- Frase motivadora -->
+    <h2 class="text-center mt-5" style="color:#2196f3; font-weight:bold;">
+      🚀 Aprende, juega y crece con nosotros 💡🎶
+    </h2>
   </div>
 </section>
 
-
-    <!-- 2. INTRODUCCIÓN -->
-    <section id="intro">
-      <h2>Introducción</h2>
-      <p>
-        Este proyecto fue creado para que nuestros compañeros aprendan. Este proyecto esta divido en curso y unidades que fueron hechas por nostros mismos.
-        Utilizando lenguajes como JavaScript , HTML que es un lenguaje de marcado de hipertexto o en pocas palabras programando para que hoy en dia ustedes aprendan.
-      </p>
-    </section>
-
+<!-- Estilos extra -->
+<style>
+  .intro-section {
+    background: linear-gradient(135deg, #fceabb, #f8b500);
+    color: #222;
+    border-radius: 15px;
+    animation: fadeIn 2s ease-in-out;
+  }
+  .intro-img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .intro-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  }
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+</style>
+s
     <!-- 3. CURSOS -->
     <section id="cursos">
-  <h1>Nuestros Cursos</h1>
-  <p>Juega mientras aprendes:</p>
-  <div id="contenedor-cursos"></div>
-</section>
+      <h1>Nuestros Cursos</h1>
+      <p>Juega mientras aprendes:</p>
+      <div id="contenedor-cursos"></div>
+    </section>
 
-<script>
-  fetch("./partials/menu.html")
-    .then(res => res.text())
-    .then(data => {
-      document.getElementById("contenedor-cursos").innerHTML = data;
-    });
-</script>
-
+    <script>
+      fetch("./partials/menu.html")
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("contenedor-cursos").innerHTML = data;
+        });
+    </script>
 
     <!-- 4. CONTACTO -->
     <section id="contacto">

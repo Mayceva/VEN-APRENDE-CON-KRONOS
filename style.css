@@ -351,3 +351,17 @@ h1, h2, h3 {
 #cursos ul li a:hover {
   text-decoration: underline;
 }
+.carousel-item img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin: auto;           /* centra las imágenes */
+}
+.carousel-item img {
+  width: 100%;            /* que ocupe todo el ancho del carrusel */
+  height: 300px;          /* altura fija, cámbiala según lo que necesites */
+  object-fit: cover;      /* recorta la imagen sin deformarla */
+  border-radius: 10px;    /* opcional: bordes redondeados */
+}
+
+
