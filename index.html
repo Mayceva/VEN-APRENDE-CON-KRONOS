@@ -39,15 +39,15 @@
   <!-- MENÚ DINÁMICO -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#" onclick="mostrarSeccion('bio')">INICIO</a>
+      <a class="navbar-brand" href="#" onclick="mostrarSeccion('bio')">😎INICIO😎</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('intro')">INTRODUCCIÓN</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('cursos')">CURSOS</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('contacto')">CONTACTOS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('intro')">👀INTRODUCCIÓN👀</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('cursos')">👫CURSOS👫</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="mostrarSeccion('contacto')">🧒🏿CONTACTOS🧒🏿</a></li>
         </ul>
       </div>
     </div>
@@ -57,10 +57,10 @@
   <main>
     <!-- 1. BIO -->
     <section id="bio" class="active">
-      <h2>Bienvenidos a Kronos</h2>
+      <h2>📚Bienvenidos al Liceo Bicentenario Kronos🎓</h2>
 
       <div class="historia-card">
-        <h3 class="historia-title">Nuestra Historia</h3>
+        <h3 class="historia-title">💖💋Nuestra Historia⚽🔥</h3>
         <!-- Aqui colocamos el carrusel -->
         <div id="demo" class="carousel slide" data-bs-ride="carousel" style="max-height: 400px; overflow: hidden;">
           <!-- Indicators/dots -->
@@ -105,7 +105,7 @@
   <div class="container py-5">
     <!-- Título con emojis -->
     <h1 class="mb-4 text-center">
-      🌍✨ ¡Bienvenido a <span style="color:#ff9800;">Kronos</span>! ✨🌍
+      🌍 ¡Bienvenido a <span style="color:#000000;">Kronos</span>! 🌍
     </h1>
 
     <!-- Texto atractivo -->
@@ -140,7 +140,7 @@
 
     <!-- Frase motivadora -->
     <h2 class="text-center mt-5" style="color:#2196f3; font-weight:bold;">
-      🚀 Aprende, juega y crece con nosotros 💡🎶
+      🚀 Aprende, juega y crece con nosotros 🎶
     </h2>
   </div>
 </section>
@@ -148,10 +148,10 @@
 <!-- Estilos extra -->
 <style>
   .intro-section {
-    background: linear-gradient(135deg, #fceabb, #f8b500);
-    color: #222;
+    background: linear-gradient(135deg, #fceabb, #ffffff);
+    color: #050202;
     border-radius: 15px;
-    animation: fadeIn 2s ease-in-out;
+    animation: fadeIn 1s ease-in-out;
   }
   .intro-img {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -174,20 +174,22 @@
   </div>
 
   <div id="contenedor-cursos" class="cursos-grid">
-    
+    <div id="contenedor-cursos" class="cursos-grid">
+  <script>
+    fetch(".partials/menu.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("contenedor-cursos").innerHTML = data;
+      });
+  </script>
+</div>
 
-
-    <script>
-      fetch("./partials/menu.html")
-        .then(res => res.text())
-        .then(data => {
-          document.getElementById("contenedor-cursos").innerHTML = data;
-        });
-    </script>
-
+     
     <!-- 4. CONTACTO -->
-    <section id="contacto">
+    <section id="contacto" class="contacto-section">
       <h2>Contacto</h2>
+      <div>Por aquì contactanos:</div>
+      
       <p>Puedes escribirnos a: <b>contacto@kronos.com</b></p>
     </section>
   </main>
