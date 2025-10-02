@@ -262,12 +262,11 @@
 </style>
 
     <script>
-    fetch("https://mayceva.github.io/VEN-APRENDE-CON-KRONOS/partials/menu.html")
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById("contenedor-cursos").innerHTML = data;
-  });
-
+      fetch("./partials/menu.html")
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("contenedor-cursos").innerHTML = data;
+        });
     </script>
 
     <!-- 4. CONTACTO -->
